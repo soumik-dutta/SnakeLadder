@@ -1,11 +1,9 @@
 import domain.Player;
 import service.BoardService;
+import service.DiceService;
 import service.SnakeService;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class SnakeLadderGameApplication {
     private static final String CONFIRM = "Y";
@@ -38,8 +36,10 @@ public class SnakeLadderGameApplication {
             }
             // create snake object with the configured values
             SnakeService.setSnakeService(snakeTwists);
-        }
 
+        }
+        // adding crooked dice
+        DiceService.setDiceService(new Random().nextInt(1));
 
         boardService = new BoardService(players, sizeOfBoard);
         boardService.start();

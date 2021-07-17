@@ -72,7 +72,7 @@ public class BoardService {
      */
     private void play(Player player) {
         // role dice
-        int dice = DiceService.roll();
+        int dice = DiceService.getDiceService().roll();
         System.out.print(player.getName() + " rolled : " + dice);
         var playerPosition = dice;
         if (getPlayerCurrentPosition().containsKey(player)) {
