@@ -11,8 +11,8 @@ public class SnakeLadderGameApplication {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the size of the board : ");
         var sizeOfBoard = scanner.nextInt();
-        System.out.println("Enter number of players wants to join : ");
-        var noOfPlayers = scanner.nextInt();
+        System.out.println("Enter number of players wants to join : 1");
+        var noOfPlayers = 1;
         var players = new LinkedList<Player>();
         for (int i = 0; i < noOfPlayers; i++) {
             System.out.println("Enter player "+ i + " : ");
