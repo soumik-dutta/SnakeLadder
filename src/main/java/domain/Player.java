@@ -5,6 +5,7 @@ import java.util.UUID;
 public class Player {
     private String name;
     private String id;
+    private int turn;
 
     public Player(String name) {
         this.name = name;
@@ -25,5 +26,13 @@ public class Player {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 }

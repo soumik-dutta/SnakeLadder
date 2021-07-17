@@ -4,9 +4,11 @@ import domain.Player;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 
 public class BoardService {
+    private static final int TURN_LIMIT = 10;
     // player queue
     private Queue<Player> players;
     // board size
@@ -51,35 +53,49 @@ public class BoardService {
         while (!getPlayers().isEmpty()) {
             // get and remove the player from the queue
             Player player = getPlayers().poll();
+            if (Objects.requireNonNull(player).getTurn() == TURN_LIMIT)
+                continue;
             // play his turn
             play(player);
         }
     }
 
+    /**
+     * 1. Dice roll
+     * 2. determining the player position in conjunction with the dice output
+     * 3. check when player is in the final move matches the exact steps
+     * needed to reach the destination
+     * 4. Increment the players turn
+     * 5. Add the player back in the queue if needed
+     *
+     * @param player
+     */
     private void play(Player player) {
         // role dice
         int dice = DiceService.roll();
-        System.out.println(player.getName() + " rolled : " + dice);
+        System.out.print(player.getName() + " rolled : " + dice);
         var playerPosition = dice;
         if (getPlayerCurrentPosition().containsKey(player)) {
             // increment the position according to the dice output
             playerPosition = getPlayerCurrentPosition().get(player) + dice;
         }
         // check for valid final move
-        if (!finalMoveValid(playerPosition)){
-            System.out.println(player.getName() + " move not valid try again ... ");
+        if (!finalMoveValid(playerPosition)) {
+            System.out.println(" move not valid try again ... ");
             getPlayers().offer(player);
             return;
         }
-        System.out.println(player.getName() + " moved to  : " + playerPosition);
+        System.out.println(" moved to  : " + playerPosition);
         getPlayerCurrentPosition().put(player, playerPosition);
+        // increment the turn
+        player.setTurn(player.getTurn() + 1);
         // add the player back into queue if he/she has not reached to the board size
         if (!isFinished(playerPosition)) {
             getPlayers().offer(player);
         }
     }
 
-    public boolean isFinished(int position) {
+    private boolean isFinished(int position) {
         return position == getBoardSize();
     }
 
@@ -89,7 +105,7 @@ public class BoardService {
      * @param position
      * @return
      */
-    public boolean finalMoveValid(int position) {
+    private boolean finalMoveValid(int position) {
         return position <= getBoardSize();
     }
 
