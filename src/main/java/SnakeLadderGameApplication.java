@@ -14,9 +14,9 @@ public class SnakeLadderGameApplication {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the size of the board : ");
+        System.out.println("Enter the size of the board: ");
         var sizeOfBoard = scanner.nextInt();
-        System.out.println("Enter number of players wants to join : 1");
+        System.out.println("Enter number of players wants to join: 1");
         var noOfPlayers = 1;
         var players = new LinkedList<Player>();
         for (int i = 0; i < noOfPlayers; i++) {
@@ -24,11 +24,12 @@ public class SnakeLadderGameApplication {
             var player = scanner.next();
             players.add(new Player(player));
         }
-        System.out.println("Do you want to enter snake moves");
+        System.out.println("Do you want to enter snake moves(Y/N): ");
         String reply = scanner.next();
         if (reply.equalsIgnoreCase(CONFIRM)) {
-            System.out.println("Enter number of moves (Eg. 14 4 : any player at 14 will come down to 4) : ");
+            System.out.println("Enter number of moves: ");
             int snakeMovesSize = scanner.nextInt();
+            System.out.println("Enter " + snakeMovesSize + " moves (Eg. 14 4 : any player at 14 will come down to 4)");
             Map<Integer, Integer> snakeTwists = new HashMap<>();
             for (int i = 0; i < snakeMovesSize; i++) {
                 int from = scanner.nextInt();

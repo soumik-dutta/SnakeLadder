@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class SnakeService {
     private static SnakeService snakeService = null;
-    public Twists twists;
+    private Twists twists;
 
     private SnakeService(Twists twists) {
         this.twists = twists;
@@ -25,5 +25,20 @@ public class SnakeService {
         if (snakeService == null && moves != null) {
             snakeService = new SnakeService(new Twists(moves));
         }
+    }
+
+    /**
+     * Check if a snake is configured in the current positions
+     *
+     * @param currentPostion
+     * @return
+     */
+    public Integer finalPosition(Integer currentPostion) {
+        Integer position = currentPostion;
+        if (twists.getMoves().containsKey(currentPostion)) {
+            position = twists.getMoves().get(currentPostion);
+            System.out.print(" OOPS! SNAKE BITE, RETURN TO " + position);
+        }
+        return position;
     }
 }

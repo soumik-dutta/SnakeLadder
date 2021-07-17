@@ -79,6 +79,8 @@ public class BoardService {
             // increment the position according to the dice output
             playerPosition = getPlayerCurrentPosition().get(player) + dice;
         }
+        // check for twists
+        playerPosition = checkAndReturnTwists(playerPosition);
         // check for valid final move
         if (!finalMoveValid(playerPosition)) {
             System.out.println(" move not valid try again ... ");
@@ -107,6 +109,13 @@ public class BoardService {
      */
     private boolean finalMoveValid(int position) {
         return position <= getBoardSize();
+    }
+
+    private Integer checkAndReturnTwists(Integer currentPosition){
+        if (SnakeService.getSnakeService()!=null) {
+            return SnakeService.getSnakeService().finalPosition(currentPosition);
+        }
+        return currentPosition;
     }
 
 
