@@ -50,7 +50,7 @@ class BoardServiceTest {
     }
 
     @Test
-    @DisplayName("Testing the game with croocked Dice")
+    @DisplayName("Testing the game snake with croocked Dice")
     void testWithSnakeCroockedDice() {
         // crooked
         serviceMockedStatic.when(DiceService::getDiceService).thenReturn(diceService);
@@ -62,6 +62,8 @@ class BoardServiceTest {
         boardService.start();
         verify(diceService, times(10)).roll();
     }
+
+
 
     private Queue<Player> getPlayers() {
         Queue<Player> players = new LinkedList<Player>();
